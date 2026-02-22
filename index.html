@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>收据生成器</title>
     <style>
+        @font-face {
+            font-family: 'STXINGKA';
+            src: url('fonts/STXINGKA.TTF') format('truetype');
+            font-display: swap;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -132,12 +138,38 @@
         .icon {
             margin-right: 5px;
         }
+
+        .font-test {
+            font-family: 'STXINGKA', 'SimHei', sans-serif;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #fff3cd;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>📄 收据生成器</h1>
+        </div>
+
+        <div class="loading" id="loading">
+            正在加载字体文件，请稍候...
+        </div>
+
+        <div class="font-test" id="fontTest">
+            字体测试：如果这里显示的是STXINGKA字体，说明字体加载成功
         </div>
 
         <div class="form">
@@ -196,7 +228,7 @@
                 <input type="text" id="handler" placeholder="请输入经办人">
             </div>
 
-            <button class="btn" onclick="generateReceipt()">✨ 生成收据</button>
+            <button class="btn" onclick="generateReceipt()" id="generateBtn">✨ 生成收据</button>
 
             <div id="success" class="success"></div>
             <div id="error" class="error"></div>
@@ -204,6 +236,51 @@
     </div>
 
     <script>
+        let fontBase64 = null;
+
+        async function loadFontAsBase64() {
+            const loadingDiv = document.getElementById('loading');
+            const generateBtn = document.getElementById('generateBtn');
+            
+            loadingDiv.style.display = 'block';
+            generateBtn.disabled = true;
+            generateBtn.textContent = '正在加载字体...';
+
+            try {
+                const response = await fetch('fonts/STXINGKA.TTF');
+                if (!response.ok) {
+                    throw new Error('无法加载字体文件');
+                }
+                const arrayBuffer = await response.arrayBuffer();
+                const blob = new Blob([arrayBuffer], { type: 'font/ttf' });
+                fontBase64 = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
+                
+                loadingDiv.style.display = 'none';
+                generateBtn.disabled = false;
+                generateBtn.textContent = '✨ 生成收据';
+                
+                const fontTest = document.getElementById('fontTest');
+                fontTest.textContent = '✅ 字体加载成功！STXINGKA字体已就绪';
+                fontTest.style.background = '#d4edda';
+                fontTest.style.color = '#155724';
+            } catch (error) {
+                console.error('加载字体失败:', error);
+                loadingDiv.style.display = 'none';
+                generateBtn.disabled = false;
+                generateBtn.textContent = '✨ 生成收据（使用默认字体）';
+                
+                const fontTest = document.getElementById('fontTest');
+                fontTest.textContent = '⚠️ 字体加载失败，将使用默认字体';
+                fontTest.style.background = '#fff3cd';
+                fontTest.style.color = '#856404';
+            }
+        }
+
         function numberToChinese(num) {
             const chineseNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
             const chineseUnits = ['', '拾', '佰', '仟', '万', '拾', '佰', '仟', '亿'];
@@ -262,6 +339,13 @@
         }
 
         function getSVGTemplate() {
+            const fontFace = fontBase64 
+                ? `@font-face {
+        font-family: 'STXINGKA';
+        src: url('${fontBase64}') format('truetype');
+      }`
+                : '';
+            
             return `<?xml version="1.0" encoding="UTF-8"?>
 <svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 566.93 283.46">
   <defs>
@@ -332,14 +416,11 @@
       .cls-15 {
         letter-spacing: 0em;
       }
-      @font-face {
-        font-family: 'STXINGKA';
-        src: url('fonts/STXINGKA.TTF') format('truetype');
-      }
+      ${fontFace}
       .cls-new {
         fill: #000;
         font-size: 9px;
-        font-family: 'STXINGKA', sans-serif;
+        font-family: 'STXINGKA', 'SimHei', sans-serif;
       }
     </style>
   </defs>
@@ -478,7 +559,8 @@
             link.click();
             document.body.removeChild(link);
             
-            showSuccess(`收据已生成：${filename}`);
+            const fontStatus = fontBase64 ? '（使用STXINGKA字体）' : '（使用默认字体）';
+            showSuccess(`收据已生成：${filename} ${fontStatus}`);
         }
 
         function showSuccess(message) {
@@ -513,6 +595,8 @@
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const day = String(today.getDate()).padStart(2, '0');
             document.getElementById('date').value = `${year}年${month}月${day}日`;
+            
+            loadFontAsBase64();
         };
     </script>
 </body>
