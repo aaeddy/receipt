@@ -595,7 +595,7 @@
             
             svgContent = svgContent.replace(
                 '</svg>',
-                `<text class="cls-new" transform="translate(430 50)"><tspan x="0" y="0">${number}</tspan></text>${stampBase64 ? `<image href="${stampBase64}" x="42" y="205" width="60" height="60" preserveAspectRatio="xMidYMid meet"/>` : ''}</svg>`
+                `<text class="cls-new" transform="translate(430 50)"><tspan x="0" y="0">${number}</tspan></text>${stampBase64 ? `<image href="${stampBase64}" x="52" y="195" width="100" height="100" preserveAspectRatio="xMidYMid meet"/>` : ''}</svg>`
             );
             
             const timestamp = new Date().toISOString().replace(/[:.]/g, '').replace('T', '_').substring(0, 15);
