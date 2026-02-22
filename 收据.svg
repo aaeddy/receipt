@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 566.93 283.46">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 0px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+        fill: #000;
+      }
+
+      .cls-2 {
+        font-size: 10px;
+      }
+
+      .cls-2, .cls-4, .cls-5, .cls-8 {
+        font-family: KaiTi, KaiTi;
+      }
+
+      .cls-10 {
+        stroke-width: .4px;
+      }
+
+      .cls-10, .cls-3, .cls-11, .cls-7 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-10, .cls-11 {
+        fill: none;
+      }
+
+      .cls-12, .cls-13, .cls-6 {
+        font-size: 11px;
+      }
+
+      .cls-3 {
+        stroke-width: .25px;
+      }
+
+      .cls-4 {
+        font-size: 20px;
+      }
+
+      .cls-13 {
+        letter-spacing: -.25em;
+      }
+
+      .cls-5, .cls-9, .cls-14 {
+        font-size: 18px;
+      }
+
+      .cls-6 {
+        glyph-orientation-vertical: 0deg;
+        text-orientation: upright;
+        writing-mode: tb;
+      }
+
+      .cls-6, .cls-9 {
+        font-family: STKaiti, STKaiti;
+      }
+
+      .cls-7 {
+        stroke-width: .5px;
+      }
+
+      .cls-15 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <text class="cls-4" transform="translate(228.46 49.28)"><tspan x="0" y="0" xml:space="preserve">收       据</tspan></text>
+  <line class="cls-10" x1="212.25" y1="56.69" x2="354.68" y2="56.69"/>
+  <line class="cls-10" x1="212.25" y1="53.86" x2="354.68" y2="53.86"/>
+  <g>
+    <path class="cls-1" d="M410.85,42.33c-1.28.14-1.7.34-1.76,1.26-.02.64-.06,1.48-.06,3.34v8.02h-.76l-8.56-10.46v5c0,1.8.06,2.7.1,3.28.04,1.02.54,1.32,1.98,1.44v.56h-4.86v-.56c1.24-.1,1.72-.4,1.8-1.38.06-.64.1-1.54.1-3.36v-5.1c0-.56-.04-.88-.4-1.32-.38-.5-.8-.62-1.78-.72v-.56h3l8.48,10.06v-4.9c0-1.86-.04-2.72-.1-3.32-.06-.9-.52-1.18-2.12-1.28v-.56h4.94v.56Z"/>
+    <path class="cls-1" d="M416.04,45.75c2.5,0,4.36,1.9,4.36,4.48,0,3.24-2.4,4.78-4.36,4.78-2.76,0-4.44-2.22-4.44-4.46,0-3.26,2.54-4.8,4.44-4.8ZM415.8,46.43c-1.22,0-2.32,1.18-2.32,3.5,0,2.54,1.12,4.38,2.76,4.38,1.24,0,2.28-.9,2.28-3.64,0-2.34-.96-4.24-2.72-4.24Z"/>
+    <path class="cls-1" d="M422.68,54.1c0-.5.38-.92.88-.92s.9.42.9.92c0,.54-.38.9-.9.9-.56-.02-.88-.4-.88-.9Z"/>
+  </g>
+  <text class="cls-2" transform="translate(213.46 74.24)"><tspan x="0" y="0" xml:space="preserve">入账日期：    年    月    日</tspan></text>
+  <rect class="cls-11" x="35.43" y="85.04" width="496.06" height="113.39"/>
+  <text class="cls-5" transform="translate(49.04 108.13)"><tspan x="0" y="0">交款单位</tspan></text>
+  <line class="cls-7" x1="128.21" y1="113.39" x2="308.33" y2="113.39"/>
+  <text class="cls-5" transform="translate(306.99 108.13)"><tspan x="0" y="0">收款方式</tspan></text>
+  <line class="cls-7" x1="382.68" y1="113.39" x2="524.41" y2="113.39"/>
+  <text class="cls-8" transform="translate(49.04 133.64)"><tspan class="cls-14" x="0" y="0">人 民 币</tspan><tspan class="cls-12" x="72" y="0">(</tspan><tspan class="cls-13" x="77.5" y="0">大写 </tspan><tspan class="cls-12" x="96.75" y="0">)</tspan></text>
+  <text class="cls-9" transform="translate(355.51 131.92)"><tspan x="0" y="0">¥</tspan></text>
+  <line class="cls-7" x1="155.91" y1="138.9" x2="340.16" y2="138.9"/>
+  <line class="cls-3" x1="381.26" y1="134.65" x2="525.83" y2="134.65"/>
+  <line class="cls-3" x1="381.26" y1="132.52" x2="525.83" y2="132.52"/>
+  <line class="cls-3" x1="381.26" y1="130.39" x2="525.83" y2="130.39"/>
+  <line class="cls-3" x1="381.26" y1="128.27" x2="525.83" y2="128.27"/>
+  <path class="cls-3" d="M381.26,126.14h144.57-144.57Z"/>
+  <line class="cls-3" x1="381.26" y1="124.02" x2="525.83" y2="124.02"/>
+  <line class="cls-3" x1="381.26" y1="121.89" x2="525.83" y2="121.89"/>
+  <line class="cls-3" x1="381.26" y1="119.76" x2="525.83" y2="119.76"/>
+  <line class="cls-3" x1="381.26" y1="117.64" x2="525.83" y2="117.64"/>
+  <text class="cls-5" transform="translate(49.04 159.15)"><tspan x="0" y="0">收款事由</tspan></text>
+  <line class="cls-7" x1="127.56" y1="164.41" x2="524.41" y2="164.41"/>
+  <text class="cls-6" transform="translate(42.52 205.24)"><tspan x="0" y="0">单位盖章</tspan></text>
+  <text class="cls-6" transform="translate(283.4 205.24)"><tspan x="0" y="0">财会主管</tspan></text>
+  <text class="cls-6" transform="translate(510.24 205.8)"><tspan x="0" y="0">经</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">办</tspan></text>
+  <text class="cls-6" transform="translate(340.16 205.8)"><tspan x="0" y="0">记</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">账</tspan></text>
+  <text class="cls-6" transform="translate(396.85 205.8)"><tspan x="0" y="0">出</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">纳</tspan></text>
+  <text class="cls-6" transform="translate(453.54 205.8)"><tspan x="0" y="0">审</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">核</tspan></text>
+  <text class="cls-2" transform="translate(429.8 194.72)"><tspan x="0" y="0" xml:space="preserve">    年    月    日</tspan></text>
+</svg>

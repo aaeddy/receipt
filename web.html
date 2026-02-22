@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收据生成器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .success {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            animation: slideIn 0.3s ease;
+        }
+
+        .error {
+            display: none;
+            background: #f44336;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📄 收据生成器</h1>
+        </div>
+
+        <div class="form">
+            <div class="form-group">
+                <label>🔢 编号</label>
+                <input type="text" id="number" placeholder="请输入编号">
+            </div>
+
+            <div class="form-group">
+                <label>📅 入账日期</label>
+                <input type="text" id="date" placeholder="YYYY年MM月DD日">
+            </div>
+
+            <div class="form-group">
+                <label>🏢 交款单位</label>
+                <input type="text" id="payer" placeholder="请输入交款单位">
+            </div>
+
+            <div class="form-group">
+                <label>💳 收款方式</label>
+                <input type="text" id="payment_method" placeholder="请输入收款方式">
+            </div>
+
+            <div class="form-group">
+                <label>💰 金额 (元)</label>
+                <input type="number" id="amount" placeholder="0.00" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label>📝 收款事由</label>
+                <input type="text" id="reason" placeholder="请输入收款事由">
+            </div>
+
+            <div class="form-group">
+                <label>👨‍💼 财会主管</label>
+                <input type="text" id="accountant" placeholder="请输入财会主管">
+            </div>
+
+            <div class="form-group">
+                <label>📒 记账</label>
+                <input type="text" id="bookkeeper" placeholder="请输入记账人">
+            </div>
+
+            <div class="form-group">
+                <label>💵 出纳</label>
+                <input type="text" id="cashier" placeholder="请输入出纳人">
+            </div>
+
+            <div class="form-group">
+                <label>✅ 审核</label>
+                <input type="text" id="auditor" placeholder="请输入审核人">
+            </div>
+
+            <div class="form-group">
+                <label>🖋️ 经办</label>
+                <input type="text" id="handler" placeholder="请输入经办人">
+            </div>
+
+            <button class="btn" onclick="generateReceipt()">✨ 生成收据</button>
+
+            <div id="success" class="success"></div>
+            <div id="error" class="error"></div>
+        </div>
+    </div>
+
+    <script>
+        function numberToChinese(num) {
+            const chineseNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+            const chineseUnits = ['', '拾', '佰', '仟', '万', '拾', '佰', '仟', '亿'];
+            
+            try {
+                const numFloat = parseFloat(num);
+                if (numFloat === 0) {
+                    return '零元整';
+                }
+                
+                const integerPart = Math.floor(numFloat);
+                const decimalPart = Math.round((numFloat - integerPart) * 100);
+                
+                let result = '';
+                
+                if (integerPart === 0) {
+                    result = '零';
+                } else {
+                    const numStr = integerPart.toString();
+                    const length = numStr.length;
+                    
+                    for (let i = 0; i < length; i++) {
+                        const digitInt = parseInt(numStr[i]);
+                        const pos = length - i - 1;
+                        
+                        if (digitInt !== 0) {
+                            result += chineseNums[digitInt] + chineseUnits[pos];
+                        } else {
+                            if (i < length - 1 && parseInt(numStr[i + 1]) !== 0) {
+                                result += chineseNums[0];
+                            }
+                        }
+                    }
+                }
+                
+                result += '元';
+                
+                if (decimalPart > 0) {
+                    const jiao = Math.floor(decimalPart / 10);
+                    const fen = decimalPart % 10;
+                    
+                    if (jiao > 0) {
+                        result += chineseNums[jiao] + '角';
+                    }
+                    if (fen > 0) {
+                        result += chineseNums[fen] + '分';
+                    }
+                } else {
+                    result += '整';
+                }
+                
+                return result;
+            } catch (e) {
+                return '零元整';
+            }
+        }
+
+        function getSVGTemplate() {
+            return `<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 566.93 283.46">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 0px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+        fill: #000;
+      }
+
+      .cls-2 {
+        font-size: 10px;
+      }
+
+      .cls-2, .cls-4, .cls-5, .cls-8 {
+        font-family: KaiTi, KaiTi;
+      }
+
+      .cls-10 {
+        stroke-width: .4px;
+      }
+
+      .cls-10, .cls-3, .cls-11, .cls-7 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-10, .cls-11 {
+        fill: none;
+      }
+
+      .cls-12, .cls-13, .cls-6 {
+        font-size: 11px;
+      }
+
+      .cls-3 {
+        stroke-width: .25px;
+      }
+
+      .cls-4 {
+        font-size: 20px;
+      }
+
+      .cls-13 {
+        letter-spacing: -.25em;
+      }
+
+      .cls-5, .cls-9, .cls-14 {
+        font-size: 18px;
+      }
+
+      .cls-6 {
+        glyph-orientation-vertical: 0deg;
+        text-orientation: upright;
+        writing-mode: tb;
+      }
+
+      .cls-6, .cls-9 {
+        font-family: STKaiti, STKaiti;
+      }
+
+      .cls-7 {
+        stroke-width: .5px;
+      }
+
+      .cls-15 {
+        letter-spacing: 0em;
+      }
+      @font-face {
+        font-family: 'STXINGKA';
+        src: url('fonts/STXINGKA.TTF') format('truetype');
+      }
+      .cls-new {
+        fill: #000;
+        font-size: 9px;
+        font-family: 'STXINGKA', sans-serif;
+      }
+    </style>
+  </defs>
+  <text class="cls-4" transform="translate(228.46 49.28)"><tspan x="0" y="0" xml:space="preserve">收       据</tspan></text>
+  <line class="cls-10" x1="212.25" y1="56.69" x2="354.68" y2="56.69"/>
+  <line class="cls-10" x1="212.25" y1="53.86" x2="354.68" y2="53.86"/>
+  <g>
+    <path class="cls-1" d="M410.85,42.33c-1.28.14-1.7.34-1.76,1.26-.02.64-.06,1.48-.06,3.34v8.02h-.76l-8.56-10.46v5c0,1.8.06,2.7.1,3.28.04,1.02.54,1.32,1.98,1.44v.56h-4.86v-.56c1.24-.1,1.72-.4,1.8-1.38.06-.64.1-1.54.1-3.36v-5.1c0-.56-.04-.88-.4-1.32-.38-.5-.8-.62-1.78-.72v-.56h3l8.48,10.06v-4.9c0-1.86-.04-2.72-.1-3.32-.06-.9-.52-1.18-2.12-1.28v-.56h4.94v.56Z"/>
+    <path class="cls-1" d="M416.04,45.75c2.5,0,4.36,1.9,4.36,4.48,0,3.24-2.4,4.78-4.36,4.78-2.76,0-4.44-2.22-4.44-4.46,0-3.26,2.54-4.8,4.44-4.8ZM415.8,46.43c-1.22,0-2.32,1.18-2.32,3.5,0,2.54,1.12,4.38,2.76,4.38,1.24,0,2.28-.9,2.28-3.64,0-2.34-.96-4.24-2.72-4.24Z"/>
+    <path class="cls-1" d="M422.68,54.1c0-.5.38-.92.88-.92s.9.42.9.92c0,.54-.38.9-.9.9-.56-.02-.88-.4-.88-.9Z"/>
+  </g>
+  <text class="cls-2" transform="translate(213.46 74.24)"><tspan x="0" y="0" xml:space="preserve">入账日期：    年    月    日</tspan></text>
+  <rect class="cls-11" x="35.43" y="85.04" width="496.06" height="113.39"/>
+  <text class="cls-5" transform="translate(49.04 108.13)"><tspan x="0" y="0">交款单位</tspan></text>
+  <line class="cls-7" x1="128.21" y1="113.39" x2="308.33" y2="113.39"/>
+  <text class="cls-5" transform="translate(306.99 108.13)"><tspan x="0" y="0">收款方式</tspan></text>
+  <line class="cls-7" x1="382.68" y1="113.39" x2="524.41" y2="113.39"/>
+  <text class="cls-8" transform="translate(49.04 133.64)"><tspan class="cls-14" x="0" y="0">人 民 币</tspan><tspan class="cls-12" x="72" y="0">(</tspan><tspan class="cls-13" x="77.5" y="0">大写 </tspan><tspan class="cls-12" x="96.75" y="0">)</tspan></text>
+  <text class="cls-9" transform="translate(355.51 131.92)"><tspan x="0" y="0">¥</tspan></text>
+  <line class="cls-7" x1="155.91" y1="138.9" x2="340.16" y2="138.9"/>
+  <line class="cls-3" x1="381.26" y1="134.65" x2="525.83" y2="134.65"/>
+  <line class="cls-3" x1="381.26" y1="132.52" x2="525.83" y2="132.52"/>
+  <line class="cls-3" x1="381.26" y1="130.39" x2="525.83" y2="130.39"/>
+  <line class="cls-3" x1="381.26" y1="128.27" x2="525.83" y2="128.27"/>
+  <path class="cls-3" d="M381.26,126.14h144.57-144.57Z"/>
+  <line class="cls-3" x1="381.26" y1="124.02" x2="525.83" y2="124.02"/>
+  <line class="cls-3" x1="381.26" y1="121.89" x2="525.83" y2="121.89"/>
+  <line class="cls-3" x1="381.26" y1="119.76" x2="525.83" y2="119.76"/>
+  <line class="cls-3" x1="381.26" y1="117.64" x2="525.83" y2="117.64"/>
+  <text class="cls-5" transform="translate(49.04 159.15)"><tspan x="0" y="0">收款事由</tspan></text>
+  <line class="cls-7" x1="127.56" y1="164.41" x2="524.41" y2="164.41"/>
+  <text class="cls-6" transform="translate(42.52 205.24)"><tspan x="0" y="0">单位盖章</tspan></text>
+  <text class="cls-6" transform="translate(283.4 205.24)"><tspan x="0" y="0">财会主管</tspan></text>
+  <text class="cls-6" transform="translate(510.24 205.8)"><tspan x="0" y="0">经</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">办</tspan></text>
+  <text class="cls-6" transform="translate(340.16 205.8)"><tspan x="0" y="0">记</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">账</tspan></text>
+  <text class="cls-6" transform="translate(396.85 205.8)"><tspan x="0" y="0">出</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">纳</tspan></text>
+  <text class="cls-6" transform="translate(453.54 205.8)"><tspan x="0" y="0">审</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">核</tspan></text>
+  <text class="cls-2" transform="translate(429.8 194.72)"><tspan x="0" y="0" xml:space="preserve">    年    月    日</tspan></text>
+</svg>`;
+        }
+
+        function generateReceipt() {
+            const number = document.getElementById('number').value;
+            const dateStr = document.getElementById('date').value;
+            const payer = document.getElementById('payer').value;
+            const paymentMethod = document.getElementById('payment_method').value;
+            const amount = document.getElementById('amount').value;
+            const reason = document.getElementById('reason').value;
+            const accountant = document.getElementById('accountant').value;
+            const bookkeeper = document.getElementById('bookkeeper').value;
+            const cashier = document.getElementById('cashier').value;
+            const auditor = document.getElementById('auditor').value;
+            const handler = document.getElementById('handler').value;
+
+            if (!dateStr) {
+                showError('请输入入账日期');
+                return;
+            }
+
+            const chineseAmount = numberToChinese(amount);
+            
+            let svgContent = getSVGTemplate();
+            
+            svgContent = svgContent.replace('入账日期：    年    月    日', `入账日期：${dateStr}`);
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-5" transform="translate(49.04 108.13)"><tspan x="0" y="0">交款单位</tspan></text>',
+                `<text class="cls-5" transform="translate(49.04 108.13)"><tspan x="0" y="0">交款单位</tspan></text><text class="cls-new" transform="translate(130 108.13)"><tspan x="0" y="0">${payer}</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-5" transform="translate(306.99 108.13)"><tspan x="0" y="0">收款方式</tspan></text>',
+                `<text class="cls-5" transform="translate(306.99 108.13)"><tspan x="0" y="0">收款方式</tspan></text><text class="cls-new" transform="translate(385 108.13)"><tspan x="0" y="0">${paymentMethod}</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-8" transform="translate(49.04 133.64)"><tspan class="cls-14" x="0" y="0">人 民 币</tspan><tspan class="cls-12" x="72" y="0">(</tspan><tspan class="cls-13" x="77.5" y="0">大写 </tspan><tspan class="cls-12" x="96.75" y="0">)</tspan></text>',
+                `<text class="cls-8" transform="translate(49.04 133.64)"><tspan class="cls-14" x="0" y="0">人 民 币</tspan><tspan class="cls-12" x="72" y="0">(</tspan><tspan class="cls-13" x="77.5" y="0">大写 </tspan><tspan class="cls-12" x="96.75" y="0">)</tspan></text><text class="cls-new" transform="translate(160 133.64)"><tspan x="0" y="0">${chineseAmount}</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-9" transform="translate(355.51 131.92)"><tspan x="0" y="0">¥</tspan></text>',
+                `<text class="cls-9" transform="translate(355.51 131.92)"><tspan x="0" y="0">¥</tspan></text><text class="cls-new" transform="translate(385 131.92)"><tspan x="0" y="0">${amount}</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-5" transform="translate(49.04 159.15)"><tspan x="0" y="0">收款事由</tspan></text>',
+                `<text class="cls-5" transform="translate(49.04 159.15)"><tspan x="0" y="0">收款事由</tspan></text><text class="cls-new" transform="translate(130 159.15)"><tspan x="0" y="0">${reason}</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-6" transform="translate(283.4 205.24)"><tspan x="0" y="0">财会主管</tspan></text>',
+                `<text class="cls-6" transform="translate(283.4 205.24)"><tspan x="0" y="0">财会主管</tspan></text><text class="cls-new" transform="translate(310 225)"><tspan x="0" y="0">${accountant}</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-6" transform="translate(340.16 205.8)"><tspan x="0" y="0">记</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">账</tspan></text>',
+                `<text class="cls-6" transform="translate(340.16 205.8)"><tspan x="0" y="0">记</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">账</tspan></text><text class="cls-new" transform="translate(367 225)"><tspan x="0" y="0">${bookkeeper}</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-6" transform="translate(396.85 205.8)"><tspan x="0" y="0">出</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">纳</tspan></text>',
+                `<text class="cls-6" transform="translate(396.85 205.8)"><tspan x="0" y="0">出</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">纳</tspan></text><text class="cls-new" transform="translate(423 225)"><tspan x="0" y="0">${cashier}</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-6" transform="translate(453.54 205.8)"><tspan x="0" y="0">审</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">核</tspan></text>',
+                `<text class="cls-6" transform="translate(453.54 205.8)"><tspan x="0" y="0">审</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">核</tspan></text><text class="cls-new" transform="translate(480 225)"><tspan x="0" y="0">${auditor}</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-6" transform="translate(510.24 205.8)"><tspan x="0" y="0">经</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">办</tspan></text>',
+                `<text class="cls-6" transform="translate(510.24 205.8)"><tspan x="0" y="0">经</tspan><tspan x="0" y="14.31" xml:space="preserve">          </tspan><tspan class="cls-15" x="0" y="41.81">办</tspan></text><text class="cls-new" transform="translate(537 225)"><tspan x="0" y="0">${handler}</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '<text class="cls-2" transform="translate(429.8 194.72)"><tspan x="0" y="0" xml:space="preserve">    年    月    日</tspan></text>',
+                `<text class="cls-2" transform="translate(429.8 194.72)"><tspan x="0" y="0" xml:space="preserve">    ${dateStr.substring(0, 4)}年${dateStr.substring(5, 7)}月${dateStr.substring(8, 10)}日</tspan></text>`
+            );
+            
+            svgContent = svgContent.replace(
+                '</svg>',
+                `<text class="cls-new" transform="translate(430 50)"><tspan x="0" y="0">${number}</tspan></text></svg>`
+            );
+            
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '').replace('T', '_').substring(0, 15);
+            const filename = `receipt_${timestamp}.svg`;
+            
+            const blob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showSuccess(`收据已生成：${filename}`);
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success');
+            const errorDiv = document.getElementById('error');
+            
+            successDiv.textContent = `✅ ${message}`;
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+            
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showError(message) {
+            const successDiv = document.getElementById('success');
+            const errorDiv = document.getElementById('error');
+            
+            errorDiv.textContent = `❌ ${message}`;
+            errorDiv.style.display = 'block';
+            successDiv.style.display = 'none';
+            
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        window.onload = function() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            document.getElementById('date').value = `${year}年${month}月${day}日`;
+        };
+    </script>
+</body>
+</html>
