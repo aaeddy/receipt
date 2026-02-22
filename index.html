@@ -63,7 +63,8 @@
             font-weight: 500;
         }
 
-        .form-group input {
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
@@ -73,10 +74,35 @@
             font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
         }
 
-        .form-group input:focus {
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            background: #fafafa;
+        }
+
+        .form-group input[type="file"]:hover {
+            border-color: #667eea;
+            background: #f0f0f0;
+        }
+
+        .preview {
+            margin-top: 10px;
+            max-width: 150px;
+            max-height: 150px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: none;
         }
 
         .btn {
@@ -228,6 +254,12 @@
                 <input type="text" id="handler" placeholder="请输入经办人">
             </div>
 
+            <div class="form-group">
+                <label>🏷️ 单位盖章 (可选)</label>
+                <input type="file" id="stamp" accept="image/*" onchange="previewStamp(this)">
+                <img id="stampPreview" class="preview" alt="盖章预览">
+            </div>
+
             <button class="btn" onclick="generateReceipt()" id="generateBtn">✨ 生成收据</button>
 
             <div id="success" class="success"></div>
@@ -237,6 +269,7 @@
 
     <script>
         let fontBase64 = null;
+        let stampBase64 = null;
 
         async function loadFontAsBase64() {
             const loadingDiv = document.getElementById('loading');
@@ -265,7 +298,7 @@
                 generateBtn.textContent = '✨ 生成收据';
                 
                 const fontTest = document.getElementById('fontTest');
-                fontTest.textContent = '✅ 字体加载成功！STXINGKA字体已就绪';
+                fontTest.textContent = '✅ STXINGKA字体加载成功';
                 fontTest.style.background = '#d4edda';
                 fontTest.style.color = '#155724';
             } catch (error) {
@@ -278,6 +311,25 @@
                 fontTest.textContent = '⚠️ 字体加载失败，将使用默认字体';
                 fontTest.style.background = '#fff3cd';
                 fontTest.style.color = '#856404';
+            }
+        }
+
+        function previewStamp(input) {
+            const preview = document.getElementById('stampPreview');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    stampBase64 = e.target.result;
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.style.display = 'none';
+                stampBase64 = null;
             }
         }
 
@@ -543,7 +595,7 @@
             
             svgContent = svgContent.replace(
                 '</svg>',
-                `<text class="cls-new" transform="translate(430 50)"><tspan x="0" y="0">${number}</tspan></text></svg>`
+                `<text class="cls-new" transform="translate(430 50)"><tspan x="0" y="0">${number}</tspan></text>${stampBase64 ? `<image href="${stampBase64}" x="42" y="205" width="60" height="60" preserveAspectRatio="xMidYMid meet"/>` : ''}</svg>`
             );
             
             const timestamp = new Date().toISOString().replace(/[:.]/g, '').replace('T', '_').substring(0, 15);
@@ -560,7 +612,8 @@
             document.body.removeChild(link);
             
             const fontStatus = fontBase64 ? '（使用STXINGKA字体）' : '（使用默认字体）';
-            showSuccess(`收据已生成：${filename} ${fontStatus}`);
+            const stampStatus = stampBase64 ? '（已添加盖章）' : '（无盖章）';
+            showSuccess(`收据已生成：${filename} ${fontStatus} ${stampStatus}`);
         }
 
         function showSuccess(message) {
