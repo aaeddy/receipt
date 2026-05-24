@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 419.53 595.28">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 14px;
+      }
+
+      .cls-1, .cls-2 {
+        font-family: KaiTi, KaiTi;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        fill: #000;
+      }
+
+      .cls-5 {
+        stroke-width: .4px;
+      }
+
+      .cls-5, .cls-6, .cls-4, .cls-7 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-5, .cls-6, .cls-7 {
+        fill: none;
+      }
+
+      .cls-2, .cls-3 {
+        font-size: 12px;
+      }
+
+      .cls-3 {
+        font-family: SimSun, SimSun;
+      }
+
+      .cls-4 {
+        font-family: STSong, STSong;
+        font-size: 24px;
+        stroke-width: .75px;
+      }
+
+      .cls-7 {
+        stroke-width: .4px;
+      }
+    </style>
+  </defs>
+  <text class="cls-4" transform="translate(131.76 32.64)"><tspan x="0" y="0" xml:space="preserve">送（销）货  单</tspan></text>
+  <line class="cls-5" x1="124.72" y1="41.1" x2="294.8" y2="41.1"/>
+  <line class="cls-5" x1="124.72" y1="38.27" x2="294.8" y2="38.27"/>
+  <text class="cls-3" transform="translate(26.69 61.01)"><tspan x="0" y="0">收货单位：</tspan></text>
+  <text class="cls-3" transform="translate(26.69 80.85)"><tspan x="0" y="0" xml:space="preserve">地    址：</tspan></text>
+  <line class="cls-7" x1="83.13" y1="63.78" x2="171.98" y2="63.78"/>
+  <line class="cls-7" x1="82.91" y1="83.62" x2="234.57" y2="83.62"/>
+  <text class="cls-3" transform="translate(265.46 80.85)"><tspan x="0" y="0">电话：</tspan></text>
+  <text class="cls-3" transform="translate(296.43 61.01)"><tspan x="0" y="0">年</tspan></text>
+  <line class="cls-7" x1="295.89" y1="83.62" x2="390.1" y2="83.62"/>
+  <line class="cls-7" x1="267" y1="63.78" x2="295.35" y2="63.78"/>
+  <line class="cls-7" x1="309.52" y1="63.78" x2="337.87" y2="63.78"/>
+  <text class="cls-3" transform="translate(340.37 61.01)"><tspan x="0" y="0">月</tspan></text>
+  <line class="cls-7" x1="352.04" y1="63.78" x2="380.39" y2="63.78"/>
+  <text class="cls-3" transform="translate(381.47 61.01)"><tspan x="0" y="0">日</tspan></text>
+  <rect class="cls-6" x="27.9" y="87.19" width="363.73" height="429.86"/>
+  <path class="cls-7" d="M391.63,520.97"/>
+  <path class="cls-7" d="M27.9,520.97"/>
+  <path class="cls-7" d="M391.63,498.5"/>
+  <path class="cls-7" d="M27.9,498.5"/>
+  <line class="cls-7" x1="27.9" y1="476.04" x2="391.63" y2="476.04"/>
+  <line class="cls-7" x1="27.9" y1="453.58" x2="391.63" y2="453.58"/>
+  <line class="cls-7" x1="27.9" y1="431.12" x2="391.63" y2="431.12"/>
+  <line class="cls-7" x1="27.9" y1="408.66" x2="391.63" y2="408.66"/>
+  <line class="cls-7" x1="27.9" y1="386.2" x2="391.63" y2="386.2"/>
+  <line class="cls-7" x1="27.9" y1="363.73" x2="391.63" y2="363.73"/>
+  <line class="cls-7" x1="27.9" y1="341.27" x2="391.63" y2="341.27"/>
+  <line class="cls-7" x1="27.9" y1="318.81" x2="391.63" y2="318.81"/>
+  <line class="cls-7" x1="27.9" y1="296.35" x2="391.63" y2="296.35"/>
+  <line class="cls-7" x1="27.9" y1="273.89" x2="391.63" y2="273.89"/>
+  <line class="cls-7" x1="27.9" y1="251.43" x2="391.63" y2="251.43"/>
+  <line class="cls-7" x1="27.9" y1="228.96" x2="391.63" y2="228.96"/>
+  <line class="cls-7" x1="27.9" y1="206.5" x2="391.63" y2="206.5"/>
+  <line class="cls-7" x1="27.9" y1="184.04" x2="391.63" y2="184.04"/>
+  <line class="cls-7" x1="27.9" y1="161.58" x2="391.63" y2="161.58"/>
+  <line class="cls-7" x1="27.9" y1="139.12" x2="391.63" y2="139.12"/>
+  <line class="cls-7" x1="27.9" y1="116.66" x2="391.63" y2="116.66"/>
+  <path class="cls-7" d="M329.51,536.43"/>
+  <path class="cls-7" d="M329.51,476.04"/>
+  <line class="cls-7" x1="329.51" y1="87.19" x2="329.51" y2="476.04"/>
+  <path class="cls-7" d="M270.15,536.43"/>
+  <path class="cls-7" d="M270.15,476.04"/>
+  <line class="cls-7" x1="270.15" y1="87.19" x2="270.15" y2="476.04"/>
+  <path class="cls-7" d="M232.61,536.43"/>
+  <path class="cls-7" d="M232.61,476.04"/>
+  <line class="cls-7" x1="232.61" y1="87.19" x2="232.61" y2="476.04"/>
+  <path class="cls-7" d="M189.34,536.43"/>
+  <path class="cls-7" d="M189.34,476.04"/>
+  <line class="cls-7" x1="189.34" y1="87.19" x2="189.34" y2="476.04"/>
+  <path class="cls-7" d="M167.12,536.43"/>
+  <path class="cls-7" d="M167.12,476.04"/>
+  <line class="cls-7" x1="167.12" y1="87.19" x2="167.12" y2="476.04"/>
+  <path class="cls-7" d="M49.93,536.43"/>
+  <path class="cls-7" d="M49.93,476.04"/>
+  <line class="cls-7" x1="49.93" y1="87.19" x2="49.93" y2="476.04"/>
+  <text class="cls-3" transform="translate(32.27 99.16)"><tspan x="0" y="0">序</tspan><tspan x="0" y="14.4">号</tspan></text>
+  <text class="cls-3" transform="translate(65.72 106.36)"><tspan x="0" y="0">名 称 及 规 格</tspan></text>
+  <text class="cls-3" transform="translate(172.58 99.16)"><tspan x="0" y="0">单</tspan><tspan x="0" y="14.4">位</tspan></text>
+  <text class="cls-3" transform="translate(196.18 106.36)"><tspan x="0" y="0">数 量</tspan></text>
+  <text class="cls-3" transform="translate(235.87 106.36)"><tspan x="0" y="0">单 价</tspan></text>
+  <text class="cls-3" transform="translate(279.64 106.36)"><tspan x="0" y="0" xml:space="preserve">金  额</tspan></text>
+  <text class="cls-3" transform="translate(342 106.36)"><tspan x="0" y="0" xml:space="preserve">备  注</tspan></text>
+  <text class="cls-2" transform="translate(36.69 131.61)"><tspan x="0" y="0">1</tspan></text>
+  <text class="cls-2" transform="translate(36.68 154.29)"><tspan x="0" y="0">2</tspan></text>
+  <text class="cls-2" transform="translate(36.68 176.97)"><tspan x="0" y="0">3</tspan></text>
+  <text class="cls-2" transform="translate(36.68 199.65)"><tspan x="0" y="0">4</tspan></text>
+  <text class="cls-2" transform="translate(36.69 222.32)"><tspan x="0" y="0">5</tspan></text>
+  <text class="cls-2" transform="translate(36.68 245)"><tspan x="0" y="0">6</tspan></text>
+  <text class="cls-2" transform="translate(36.68 267.68)"><tspan x="0" y="0">7</tspan></text>
+  <text class="cls-2" transform="translate(36.69 290.35)"><tspan x="0" y="0">8</tspan></text>
+  <text class="cls-2" transform="translate(36.68 313.03)"><tspan x="0" y="0">9</tspan></text>
+  <text class="cls-2" transform="translate(33.69 335.71)"><tspan x="0" y="0">10</tspan></text>
+  <text class="cls-2" transform="translate(33.69 358.39)"><tspan x="0" y="0">11</tspan></text>
+  <text class="cls-2" transform="translate(33.68 381.06)"><tspan x="0" y="0">12</tspan></text>
+  <text class="cls-2" transform="translate(33.69 403.74)"><tspan x="0" y="0">13</tspan></text>
+  <text class="cls-2" transform="translate(33.68 426.42)"><tspan x="0" y="0">14</tspan></text>
+  <text class="cls-2" transform="translate(33.69 449.09)"><tspan x="0" y="0">15</tspan></text>
+  <text class="cls-2" transform="translate(33.69 471.77)"><tspan x="0" y="0">16</tspan></text>
+  <line class="cls-7" x1="69.41" y1="476.04" x2="69.41" y2="517.05"/>
+  <text class="cls-2" transform="translate(36.19 492.92)"><tspan x="0" y="0">合计</tspan><tspan x="0" y="14.4">金额</tspan></text>
+  <text class="cls-2" transform="translate(32.69 549.61)"><tspan x="0" y="0">收货单位</tspan><tspan x="0" y="14.4">及经手人</tspan></text>
+  <text class="cls-2" transform="translate(76.3 556.81)"><tspan x="0" y="0">（盖章）：</tspan></text>
+  <text class="cls-2" transform="translate(216.94 549.61)"><tspan x="0" y="0">送货单位</tspan><tspan x="0" y="14.4">及经手人</tspan></text>
+  <text class="cls-2" transform="translate(260.55 556.81)"><tspan x="0" y="0">（盖章）：</tspan></text>
+  <text class="cls-2" transform="translate(96.43 500.12)"><tspan x="0" y="0" xml:space="preserve">佰  拾  万  仟  佰  拾  元  角  分</tspan></text>
+  <text class="cls-1" transform="translate(318.98 500.79)"><tspan x="0" y="0">￥</tspan></text>
+  <line class="cls-7" x1="329.75" y1="503.15" x2="378.91" y2="503.15"/>
+</svg>
